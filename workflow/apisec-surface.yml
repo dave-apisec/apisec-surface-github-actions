@@ -32,4 +32,6 @@ jobs:
         env:
           APISEC_PAT: ${{ secrets.APISEC_PAT }}
           APISEC_REGISTRATION_CODE: ${{ secrets.APISEC_REGISTRATION_CODE }}
+          # Stable app identity, so repeat runs update the same applications.
+          APISEC_CANONICAL_REPO_ID: github:${{ github.repository_id }}
         run: apisec-surface analyze . --api-url https://api.apisecapps.com

@@ -28,7 +28,7 @@ In **Settings → Secrets and variables → Actions**:
 
 Copy [`workflow/apisec-surface.yml`](workflow/apisec-surface.yml) to `.github/workflows/apisec-surface.yml` in your repository and commit it.
 
-It runs on every push to `main` and on demand. If several merges land close together, only the newest run continues.
+It runs on every push to `main` and on demand. If several merges land close together, only the newest run continues. Each run is tied to your repository's GitHub id, so repeat runs update the same applications in APIsec instead of creating new ones.
 
 ## 4. Run it once by hand
 
