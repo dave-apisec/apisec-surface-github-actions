@@ -1,0 +1,35 @@
+# Copy this file to .github/workflows/apisec-surface.yml in your repository.
+# Requires two repository secrets: APISEC_PAT and APISEC_REGISTRATION_CODE.
+name: APIsec Surface
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# On a busy main branch, only the newest commit needs analyzing.
+concurrency:
+  group: apisec-surface
+  cancel-in-progress: true
+
+jobs:
+  surface:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install APIsec Surface
+        run: pip install "apisec-surface==1.1.0"
+
+      - name: Analyze and upload to APIsec
+        env:
+          APISEC_PAT: ${{ secrets.APISEC_PAT }}
+          APISEC_REGISTRATION_CODE: ${{ secrets.APISEC_REGISTRATION_CODE }}
+        run: apisec-surface analyze . --api-url https://api.apisecapps.com
