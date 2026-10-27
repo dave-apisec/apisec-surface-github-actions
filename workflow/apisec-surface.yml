@@ -26,7 +26,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install APIsec Surface
-        run: pip install "apisec-surface==1.2.0"
+        run: pip install "apisec-surface>=1.2,<2"
 
       - name: Analyze and upload to APIsec
         env:

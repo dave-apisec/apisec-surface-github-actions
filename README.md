@@ -9,7 +9,7 @@ The whole setup is one workflow file of about 30 lines of YAML you can read end 
 With Python 3.11 or later, from your repository root:
 
 ```bash
-pip install "apisec-surface==1.2.0"
+pip install "apisec-surface>=1.2,<2"
 apisec-surface analyze . --dry-run
 ```
 
@@ -27,6 +27,8 @@ In **Settings → Secrets and variables → Actions**:
 ## 3. Add the workflow
 
 Copy [`workflow/apisec-surface.yml`](workflow/apisec-surface.yml) to `.github/workflows/apisec-surface.yml` in your repository and commit it.
+
+Each run installs the newest 1.x release of Surface (1.2 or later), so fixes arrive without editing the file. To control upgrades yourself, replace the range with an exact version, such as `apisec-surface==1.2.0`.
 
 It runs on every push to `main` and on demand. If several merges land close together, only the newest run continues. Surface identifies your repository from GitHub, so repeat runs update the same applications in APIsec instead of creating new ones.
 
